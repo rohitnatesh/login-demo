@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client';
 
 // Dependencies.
 
-import App from './App';
+import App from './components/App';
 
 // Public.
 

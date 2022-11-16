@@ -1,0 +1,14 @@
+{
+    "en": {
+        "emailLabel": "Email address",
+        "passwordLabel": "Password",
+        "emailErrorLabel": "Enter valid email",
+        "submit": "Submit"
+    },
+    "es": {
+        "emailLabel": "Dirección de correo electrónico",
+        "passwordLabel": "Clave",
+        "emailErrorLabel": "Ingrese un email valido",
+        "submit": "Enviar"
+    }
+}

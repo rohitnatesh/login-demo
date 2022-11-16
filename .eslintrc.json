@@ -30,6 +30,12 @@
         "trailingComma": "es5"
       }
     ],
-    "react/react-in-jsx-scope": "off"
+    "react/react-in-jsx-scope": "off",
+    "import/no-named-as-default": "off",
+    "no-empty-pattern": "off",
+    "react/function-component-definition": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": "warn"
   }
 }
