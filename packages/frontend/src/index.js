@@ -1,17 +1,17 @@
 // Libraries.
 
-import React from 'react';
 import ReactDOM from 'react-dom/client';
 
 // Dependencies.
 
+import AuthenticationProvider from './components/AuthenticationProvider';
 import App from './components/App';
 
 // Public.
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  <AuthenticationProvider>
     <App />
-  </React.StrictMode>
+  </AuthenticationProvider>
 );
