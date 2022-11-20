@@ -6,12 +6,12 @@ const usersDB = {
   },
 };
 
-const sessionsDB = {}
+const sessionsDB = new Map();
 
 const login = (request, response) => {
   if (request.body?.email === 'test@test.com') {
-    const token = 'abcd'
-    sessionsDB[token] = request.body.email;
+    const token = 'abcd';
+    sessionsDB.set(token, request.body.email);
 
     response.cookie('token', token, {
       httpOnly: true,
@@ -24,25 +24,40 @@ const login = (request, response) => {
   }
 };
 
-const logout = () => {};
+const logout = (request, response) => {
+  const tokenInCookie = request.cookies?.token;
+
+  if (tokenInCookie && sessionsDB.has(tokenInCookie)) {
+    sessionsDB.clear(tokenInCookie);
+    response.clearCookie('token', {
+      httpOnly: true,
+    });
+    response.status(200).send({
+      isAuthorized: false,
+    });
+  } else {
+    response.sendStatus(500);
+  }
+};
+
 const status = (request, response) => {
   const tokenInCookie = request.cookies?.token;
 
-  if(tokenInCookie && sessionsDB[tokenInCookie]) {
-    const userEmail = sessionsDB[tokenInCookie]
-    const userDetails = usersDB[userEmail]
+  if (tokenInCookie && sessionsDB.has(tokenInCookie)) {
+    const userEmail = sessionsDB.get(tokenInCookie);
+    const userDetails = usersDB[userEmail];
 
     response.status(200).send({
       isAuthorized: true,
-      ...userDetails
-    })
+      ...userDetails,
+    });
   } else {
     response.status(200).send({
       isAuthorized: false,
       name: null,
       email: null,
-      role: null
-    })
+      role: null,
+    });
   }
 };
 

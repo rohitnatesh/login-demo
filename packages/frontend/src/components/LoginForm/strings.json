@@ -3,12 +3,14 @@
         "emailLabel": "Email address",
         "passwordLabel": "Password",
         "emailErrorLabel": "Enter valid email",
+        "passwordErrorLabel": "Enter valid password",
         "submit": "Submit"
     },
     "es": {
         "emailLabel": "Dirección de correo electrónico",
         "passwordLabel": "Clave",
         "emailErrorLabel": "Ingrese un email valido",
+        "passwordErrorLabel": "Introduce una contraseña válida",
         "submit": "Enviar"
     }
 }

@@ -1,5 +1,6 @@
 // Dependencies.
 
+import Home from '../Home';
 import LoginForm from '../LoginForm';
 import Route from '../Route';
 
@@ -13,7 +14,7 @@ const App = () => {
   return (
     <>
       <Route path="/" isSecure>
-        Home
+        <Home />
       </Route>
       <Route path="/login">
         <LoginForm onAuthenticate={handleAuthentication} />

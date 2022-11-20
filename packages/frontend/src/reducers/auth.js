@@ -42,6 +42,25 @@ export const loginThunk = createAsyncThunk(
   }
 );
 
+export const logoutThunk = createAsyncThunk(
+  'auth/logout',
+  async (userData, { rejectWithValue }) => {
+    const response = await fetch('/api/auth/logout', {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      method: 'POST',
+    });
+
+    if (response.ok) {
+      return response.json();
+    }
+
+    return rejectWithValue('Logout failed!');
+  }
+);
+
 const authSlice = createSlice({
   name: 'auth',
   initialState,
@@ -53,6 +72,14 @@ const authSlice = createSlice({
       return {
         ...state,
         isAuthorized: payload.isAuthorized,
+      };
+    });
+
+    builder.addCase(logoutThunk.fulfilled, (state) => {
+      return {
+        ...state,
+        ...initialState,
+        statusFetched: true,
       };
     });
   },
