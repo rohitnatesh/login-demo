@@ -11,3 +11,6 @@ Starts the bacend node + Express instance.
 
 ### 3. npm start
 Starts both the frontend and backend.
+
+### 4. npm run bootstrap
+Install the dependencies of all the packages in the monorepo.
