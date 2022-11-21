@@ -6,10 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 // Dependencies.
 
 import { actions } from '../../reducers/auth';
+import endpoints from '../../utilities/endpoints';
 
 // Private.
 
-const statusApiPromise = fetch('/api/auth/status', { method: 'GET' });
+const statusApiPromise = fetch(endpoints.status, {
+  method: 'GET',
+  headers: {
+    Accept: 'application/json',
+  },
+});
 
 // Public.
 

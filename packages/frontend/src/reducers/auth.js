@@ -2,6 +2,10 @@
 
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
+// Dependencies.
+
+import endpoints from '../utilities/endpoints';
+
 // Private.
 
 const initialState = {
@@ -10,6 +14,7 @@ const initialState = {
   name: null,
   email: null,
   role: null,
+  loginAttemptError: false,
 };
 
 const status = (state, { payload }) => {
@@ -25,7 +30,7 @@ const status = (state, { payload }) => {
 export const loginThunk = createAsyncThunk(
   'auth/login',
   async (userData, { rejectWithValue }) => {
-    const response = await fetch('/api/auth/login', {
+    const response = await fetch(endpoints.login, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -45,7 +50,7 @@ export const loginThunk = createAsyncThunk(
 export const logoutThunk = createAsyncThunk(
   'auth/logout',
   async (userData, { rejectWithValue }) => {
-    const response = await fetch('/api/auth/logout', {
+    const response = await fetch(endpoints.logout, {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -68,20 +73,24 @@ const authSlice = createSlice({
     status,
   },
   extraReducers: (builder) => {
-    builder.addCase(loginThunk.fulfilled, (state, { payload }) => {
-      return {
-        ...state,
-        isAuthorized: payload.isAuthorized,
-      };
-    });
+    builder.addCase(loginThunk.pending, (state) => ({
+      ...state,
+      loginAttemptError: false,
+    }));
+    builder.addCase(loginThunk.fulfilled, (state, { payload }) => ({
+      ...state,
+      isAuthorized: payload.isAuthorized,
+    }));
+    builder.addCase(loginThunk.rejected, (state) => ({
+      ...state,
+      loginAttemptError: true,
+    }));
 
-    builder.addCase(logoutThunk.fulfilled, (state) => {
-      return {
-        ...state,
-        ...initialState,
-        statusFetched: true,
-      };
-    });
+    builder.addCase(logoutThunk.fulfilled, (state) => ({
+      ...state,
+      ...initialState,
+      statusFetched: true,
+    }));
   },
 });
 

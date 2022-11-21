@@ -4,13 +4,15 @@
         "passwordLabel": "Password",
         "emailErrorLabel": "Enter valid email",
         "passwordErrorLabel": "Enter valid password",
-        "submit": "Submit"
+        "submit": "Submit",
+        "loginFailedError": "Login failed! Try again"
     },
     "es": {
         "emailLabel": "Dirección de correo electrónico",
         "passwordLabel": "Clave",
         "emailErrorLabel": "Ingrese un email valido",
         "passwordErrorLabel": "Introduce una contraseña válida",
-        "submit": "Enviar"
+        "submit": "Enviar",
+        "loginFailedError": "¡Error de inicio de sesion! Intentar otra vez"
     }
 }

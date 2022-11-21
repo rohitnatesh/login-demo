@@ -16,7 +16,9 @@ import { getIsEmailValid } from '../../utilities/email';
 
 const LoginForm = ({ onAuthenticate }) => {
   const language = useSelector((state) => state.language);
-  const isAuthorized = useSelector((state) => state.auth.isAuthorized);
+  const { isAuthorized, loginAttemptError } = useSelector(
+    (state) => state.auth
+  );
   const dispatch = useDispatch();
 
   const currentStrings = strings[language.code] ?? strings.en;
@@ -63,7 +65,12 @@ const LoginForm = ({ onAuthenticate }) => {
       <nav>
         <LanguageSelector />
       </nav>
-      <main>
+      <main style={{ marginTop: '20px' }}>
+        {loginAttemptError ? (
+          <div style={{ color: 'red', margin: '10px 0' }}>
+            {currentStrings.loginFailedError}
+          </div>
+        ) : null}
         <form>
           <Input
             label={
